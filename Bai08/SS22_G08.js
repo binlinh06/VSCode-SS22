@@ -1,26 +1,22 @@
-let arr = [2, 5, 7, 4, 1, 8, 6, 2, 5, 7];  
-let count = [];  
-let maxFreq = 0;  
-let result = Infinity;  
-for (let i = 0; i < arr.length; i++) {
-    console.log(`   ${arr[i]}`);
+let arr = [2, 5, 7, 4, 1, 8, 6, 2, 5, 7];
+let count = [];
+for (let num of arr) {
+    count[num] = (count[num] || 0) + 1;
 }
-for (let i = 0; i < arr.length; i++) {
-    let num = arr[i];
-    if (count[num] === undefined) { 
-        count[num] = 1; 
-    } else {
-        count[num]++; 
-    }
-}
-for (let key in count) { 
+
+let maxFreq = 0;
+let candidates = [];
+
+for (let key in count) {
     let num = Number(key);
-    if (count[num] > maxFreq) {  
-        maxFreq = count[num];  
-        result = num;  
-    } else if (count[num] === maxFreq && num < result) {  
-        result = num;  
+    if (count[num] > maxFreq) {
+        maxFreq = count[num]; 
+        candidates = [num];   
+    } else if (count[num] === maxFreq) {
+        candidates.push(num); 
     }
 }
 
-console.log(result);  
+let minNumber = Math.min(...candidates);
+
+console.log(minNumber); 
